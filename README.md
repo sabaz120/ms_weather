@@ -3,7 +3,7 @@
 Este microservicio gestiona la información de los usuarios, incluyendo su creación, actualización, eliminación y asignación de roles. Además, permite a los usuarios visualizar el clima mediante la API de WeatherAPI, almacenar ciudades favoritas y visualizar sus últimas 5 búsquedas recientes.
 
 ## Características Adicionales:
-
+* **Multilenguaje**: El microservicio soporta los idiomas inglés y español. Puedes especificar el idioma deseado enviando el parámetro lang en la solicitud API, con los valores en para inglés y es para español. Las respuestas de la API, incluyendo la descripción del clima, se traducirán al idioma seleccionado.
 * **Caché de Clima**: Para optimizar el rendimiento y evitar solicitudes excesivas a la API de WeatherAPI, el microservicio implementa un caché de 30 minutos por ciudad consultada.
 * **Procesamiento en Segundo Plano**: Las búsquedas de clima se almacenan en una cola para su procesamiento en segundo plano, lo que garantiza una respuesta rápida al usuario.
 * **Documentación Swagger**: La API está documentada utilizando Swagger, y puedes acceder a la documentación interactiva en /api/documentation. Aquí, puedes explorar los endpoints, realizar solicitudes de prueba y obtener información detallada sobre cada API.
@@ -260,20 +260,23 @@ Para ejecutar este microservicio utilizando Docker, sigue estos pasos:
     * `docker-compose up --build -d`
     * Este comando construirá las imágenes de Docker y levantará los contenedores en modo "detached" (en segundo plano).
 
-4.  **Ejecuta las migraciones y semillas en el contenedor `api`:**
+4.  **Instalar las dependencias de Composer:**
+    * `docker-compose exec api composer install`
+
+5.  **Ejecuta las migraciones y semillas en el contenedor `api`:**
     * `docker-compose exec api php artisan migrate --seed`
     * Este comando ejecutará las migraciones de la base de datos y los seeders para poblar la base de datos con datos iniciales.
 
-5.  **Genera la clave de la aplicación Laravel:**
+6.  **Genera la clave de la aplicación Laravel:**
     * `docker-compose exec api php artisan key:generate`
     * Este comando generará una clave de aplicación única para tu instalación de Laravel.
 
-6.  **Accede a la API:**
-    * La API estará disponible en `http://localhost:8004/api/v1/`.
+7.  **Accede a la API:**
+    * La documentación de la API está disponible en `http://localhost:8004/api/documentation`.
 
 ## Tecnologías Utilizadas
 
-* PHP 8.1+
+* PHP 8.2+
 * Laravel 10
 * MySQL
 * PHPUnit (para los tests)
